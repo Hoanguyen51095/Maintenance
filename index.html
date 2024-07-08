@@ -1,0 +1,152 @@
+<!-- 
+
+Welcome to GDB Online.
+GDB online is an online compiler and debugger tool for C, C++, Python, Java, PHP, Ruby, Perl,
+C#, OCaml, VB, Swift, Pascal, Fortran, Haskell, Objective-C, Assembly, HTML, CSS, JS, SQLite, Prolog.
+Code, Compile, Run and Debug online from anywhere in world.
+
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maintenance Schedule</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f9fc;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+        }
+        h1 {
+            text-align: center;
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        input, select, textarea {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .task {
+            padding: 15px;
+            background-color: #e9ecef;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        p {
+            margin: 0 0 10px;
+        }
+        strong {
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Maintenance Schedule</h1>
+
+        <div id="taskForm">
+            <label for="taskName">Tên nhiệm vụ:</label>
+            <input type="text" id="taskName" placeholder="Nhập tên nhiệm vụ">
+            
+            <label for="taskDescription">Mô tả nhiệm vụ:</label>
+            <textarea id="taskDescription" rows="4" placeholder="Nhập mô tả nhiệm vụ"></textarea>
+            
+            <label for="taskDate">Ngày bảo trì:</label>
+            <input type="date" id="taskDate">
+            
+            <label for="taskAssignee">Phân công cho:</label>
+            <input type="text" id="taskAssignee" placeholder="Nhập tên người nhận nhiệm vụ">
+            
+            <button onclick="addTask()">Thêm nhiệm vụ</button>
+        </div>
+        
+        <h2>Nhiệm vụ bảo trì</h2>
+        <div id="tasks"></div>
+    </div>
+    
+    <script>
+        let tasks = [];
+
+        function addTask() {
+            const taskName = document.getElementById('taskName').value;
+            const taskDescription = document.getElementById('taskDescription').value;
+            const taskDate = document.getElementById('taskDate').value;
+            const taskAssignee = document.getElementById('taskAssignee').value;
+
+            if (taskName && taskDescription && taskDate && taskAssignee) {
+                const task = {
+                    name: taskName,
+                    description: taskDescription,
+                    date: taskDate,
+                    assignee: taskAssignee
+                };
+                tasks.push(task);
+                displayTasks();
+                clearForm();
+            } else {
+                alert('Vui lòng điền đầy đủ thông tin nhiệm vụ.');
+            }
+        }
+
+        function displayTasks() {
+            const tasksContainer = document.getElementById('tasks');
+            tasksContainer.innerHTML = '';
+            tasks.forEach((task, index) => {
+                tasksContainer.innerHTML += `
+                    <div class="task">
+                        <h3>Nhiệm vụ ${index + 1}</h3>
+                        <p><strong>Tên nhiệm vụ:</strong> ${task.name}</p>
+                        <p><strong>Mô tả:</strong> ${task.description}</p>
+                        <p><strong>Ngày bảo trì:</strong> ${task.date}</p>
+                        <p><strong>Phân công cho:</strong> ${task.assignee}</p>
+                    </div>
+                `;
+            });
+        }
+
+        function clearForm() {
+            document.getElementById('taskName').value = '';
+            document.getElementById('taskDescription').value = '';
+            document.getElementById('taskDate').value = '';
+            document.getElementById('taskAssignee').value = '';
+        }
+    </script>
+</body>
+</html>
